@@ -1,10 +1,8 @@
-import { useMemo } from "react";
 import { RoundedBox } from "@react-three/drei";
-import { DataTexture, NearestFilter, RedFormat } from "three";
 
 export const COLORS = {
-  steel: "#4a4f8a",
-  dark: "#363a73",
+  steel: "#9298dc",
+  dark: "#555b9e",
   screen: "#030412",
   eye: "#57db96",
   trim: "#33c2cc",
@@ -14,50 +12,62 @@ export const COLORS = {
 // Same 6.67 s loop as the model's idle animation.
 export const W = (Math.PI * 2) / 6.667;
 
-const OUTLINE = 0.2;
+// Brushed-metal plating, glossy glass for the screen and softly glowing
+// trim, all lit by the sunset colors of the background.
+export const Material = ({ color }) => {
+  if (color === COLORS.screen) {
+    return (
+      <meshPhysicalMaterial
+        color={color}
+        metalness={0.9}
+        roughness={0.05}
+        clearcoat={1}
+        envMapIntensity={1.4}
+      />
+    );
+  }
+  if (color === COLORS.trim) {
+    return (
+      <meshStandardMaterial
+        color={color}
+        metalness={0.5}
+        roughness={0.3}
+        emissive={color}
+        emissiveIntensity={0.4}
+      />
+    );
+  }
+  return (
+    <meshStandardMaterial
+      color={color}
+      metalness={0.75}
+      roughness={0.32}
+      envMapIntensity={1.3}
+    />
+  );
+};
 
-// Three flat shading steps, like the painted shading of the original model.
-export const useCelGradient = () =>
-  useMemo(() => {
-    const tex = new DataTexture(new Uint8Array([90, 170, 255]), 3, 1, RedFormat);
-    tex.minFilter = tex.magFilter = NearestFilter;
-    tex.needsUpdate = true;
-    return tex;
-  }, []);
-
-// A faceted cel-shaded box with a thick black outline.
 export const Plate = ({
   size,
   radius,
   color,
-  gradient,
   position = [0, 0, 0],
   ...props
 }) => (
-  <group position={position} {...props}>
-    <RoundedBox args={size} radius={radius} smoothness={2}>
-      <meshToonMaterial color={color} gradientMap={gradient} />
-    </RoundedBox>
-    <RoundedBox
-      args={size.map((s) => s + OUTLINE)}
-      radius={radius}
-      smoothness={2}
-    >
-      <meshBasicMaterial color="#000000" side={1} />
-    </RoundedBox>
-  </group>
+  <RoundedBox
+    args={size}
+    radius={radius}
+    smoothness={5}
+    position={position}
+    {...props}
+  >
+    <Material color={color} />
+  </RoundedBox>
 );
 
-// A cel-shaded sphere with an outline.
-export const Ball = ({ radius, color, gradient, position = [0, 0, 0] }) => (
-  <group position={position}>
-    <mesh>
-      <sphereGeometry args={[radius, 16, 12]} />
-      <meshToonMaterial color={color} gradientMap={gradient} />
-    </mesh>
-    <mesh>
-      <sphereGeometry args={[radius + OUTLINE / 2, 16, 12]} />
-      <meshBasicMaterial color="#000000" side={1} />
-    </mesh>
-  </group>
+export const Ball = ({ radius, color, position = [0, 0, 0] }) => (
+  <mesh position={position}>
+    <sphereGeometry args={[radius, 32, 24]} />
+    <Material color={color} />
+  </mesh>
 );

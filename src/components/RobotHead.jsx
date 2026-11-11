@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Matrix4, Vector3 } from "three";
-import { COLORS, Plate, W, useCelGradient } from "./robotStyle";
+import { COLORS, Material, Plate, W } from "./robotStyle";
 
 const ONE = new Vector3(1, 1, 1);
 const m = new Matrix4();
@@ -21,7 +21,6 @@ export function RobotHead({ nodes }) {
   const eyes = useRef();
   const face = useRef();
   const antenna = useRef();
-  const gradient = useCelGradient();
 
   useFrame((state) => {
     const bone = nodes.spine006_metarig;
@@ -50,17 +49,14 @@ export function RobotHead({ nodes }) {
 
   return (
     <>
-      <ambientLight intensity={1.2} />
-      <directionalLight position={[5, 8, 10]} intensity={2.5} />
       <group ref={ref}>
         <group ref={face} position={[0, 1.0, 0.2]} scale={0.62}>
-          <Plate size={[4.6, 3.8, 3.8]} radius={0.9} color={STEEL} gradient={gradient} />
+          <Plate size={[4.6, 3.8, 3.8]} radius={0.9} color={STEEL} />
           {/* Screen face */}
           <Plate
             size={[3.4, 2.2, 0.3]}
             radius={0.45}
             color={SCREEN}
-            gradient={gradient}
             position={[0, 0, 1.95]}
           />
           <group ref={eyes} position={[0, 0.15, 2.2]}>
@@ -82,7 +78,6 @@ export function RobotHead({ nodes }) {
               size={[0.6, 1.6, 1.2]}
               radius={0.25}
               color={TRIM}
-              gradient={gradient}
               position={[x, 0, 0]}
             />
           ))}
@@ -90,7 +85,7 @@ export function RobotHead({ nodes }) {
           <group ref={antenna} position={[0, 1.9, 0]}>
             <mesh position={[0, 0.45, 0]}>
               <cylinderGeometry args={[0.09, 0.09, 0.9, 8]} />
-              <meshToonMaterial color={TRIM} gradientMap={gradient} />
+              <Material color={TRIM} />
             </mesh>
             <mesh position={[0, 1.05, 0]}>
               <icosahedronGeometry args={[0.3, 0]} />
@@ -102,7 +97,6 @@ export function RobotHead({ nodes }) {
             size={[4.7, 0.35, 3.9]}
             radius={0.12}
             color={TRIM}
-            gradient={gradient}
             position={[0, 1.2, 0]}
           />
         </group>

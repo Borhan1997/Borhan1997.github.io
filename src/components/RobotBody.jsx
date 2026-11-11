@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { createPortal } from "@react-three/fiber";
 import { Matrix4, Quaternion, Vector3 } from "three";
-import { Ball, COLORS, Plate, useCelGradient } from "./robotStyle";
+import { Ball, COLORS, Plate } from "./robotStyle";
 
 const Y = new Vector3(0, 1, 0);
 
@@ -13,7 +13,7 @@ const bone = (nodes, name) => nodes[name.replace(/\./g, "")];
  * it moves with the original animation. Each limb part runs along its bone,
  * from the bone's origin to its child's origin.
  */
-function Limb({ from, to, radius, color, gradient }) {
+function Limb({ from, to, radius, color }) {
   const { length, quaternion } = useMemo(() => {
     const v = to.position.clone();
     return {
@@ -27,7 +27,6 @@ function Limb({ from, to, radius, color, gradient }) {
         size={[radius * 2, length * 0.8, radius * 2]}
         radius={radius * 0.8}
         color={color}
-        gradient={gradient}
         position={[0, length / 2, 0]}
       />
     </group>,
@@ -35,14 +34,14 @@ function Limb({ from, to, radius, color, gradient }) {
   );
 }
 
-function Joint({ at, radius, gradient }) {
+function Joint({ at, radius }) {
   return createPortal(
-    <Ball radius={radius} color={COLORS.trim} gradient={gradient} />,
+    <Ball radius={radius} color={COLORS.trim} />,
     at
   );
 }
 
-function Torso({ nodes, gradient }) {
+function Torso({ nodes }) {
   const torso = bone(nodes, "spine.003_metarig");
   // The shoulders define which way is "sideways" in the torso's frame.
   const basis = useMemo(() => {
@@ -64,7 +63,6 @@ function Torso({ nodes, gradient }) {
         size={[3.2, 2.6, 2.2]}
         radius={0.7}
         color={COLORS.steel}
-        gradient={gradient}
         position={[0, 0.5, 0]}
       />
       {/* Chest light */}
@@ -77,7 +75,6 @@ function Torso({ nodes, gradient }) {
         size={[2.6, 1.6, 2]}
         radius={0.5}
         color={COLORS.dark}
-        gradient={gradient}
         position={[-0.1, -2.1, 0]}
       />
       {/* Neck */}
@@ -85,7 +82,6 @@ function Torso({ nodes, gradient }) {
         size={[1.1, 0.6, 1.1]}
         radius={0.25}
         color={COLORS.trim}
-        gradient={gradient}
         position={[0, 2.0, 0]}
       />
     </group>,
@@ -94,7 +90,6 @@ function Torso({ nodes, gradient }) {
 }
 
 export function RobotBody({ nodes }) {
-  const gradient = useCelGradient();
   const b = (name) => bone(nodes, name);
   const limbs = [];
   for (const s of ["L", "R"]) {
@@ -121,7 +116,7 @@ export function RobotBody({ nodes }) {
   }
   return (
     <>
-      <Torso nodes={nodes} gradient={gradient} />
+      <Torso nodes={nodes} />
       {limbs.map(([from, to, radius, color]) => (
         <Limb
           key={from + to}
@@ -129,11 +124,10 @@ export function RobotBody({ nodes }) {
           to={b(to)}
           radius={radius}
           color={color}
-          gradient={gradient}
         />
       ))}
       {joints.map(([name, radius]) => (
-        <Joint key={name} at={b(name)} radius={radius} gradient={gradient} />
+        <Joint key={name} at={b(name)} radius={radius} />
       ))}
     </>
   );
