@@ -1,7 +1,7 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import HeroText from "../components/HeroText";
 import ParallaxBackground from "../components/parallaxBackground";
-import { Robot } from "../components/Robot";
+import { Astronaut } from "../components/Astronaut";
 import { Float } from "@react-three/drei";
 import { useMediaQuery } from "react-responsive";
 import { easing } from "maath";
@@ -20,13 +20,10 @@ const Hero = () => {
       >
         <Canvas camera={{ position: [0, 1, 3] }}>
           <Suspense fallback={<Loader />}>
-            <ambientLight intensity={0.8} />
-            <directionalLight position={[3, 4, 5]} intensity={2.5} />
-            <pointLight position={[-3, 1, 2]} color="#33c2cc" intensity={12} />
             <Float>
-              <Robot
-                scale={isMobile ? 0.6 : 1}
-                position={isMobile ? [0, -1.4, 0] : [1.3, -0.6, 0]}
+              <Astronaut
+                scale={isMobile && 0.23}
+                position={isMobile && [0, -1.5, 0]}
               />
             </Float>
             <Rig />
