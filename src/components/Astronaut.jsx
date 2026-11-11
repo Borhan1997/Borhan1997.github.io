@@ -11,6 +11,7 @@ import { useGLTF, useAnimations, useTexture } from "@react-three/drei";
 import { SRGBColorSpace } from "three";
 import { useMotionValue, useSpring } from "motion/react";
 import { useFrame } from "@react-three/fiber";
+import { RobotHead } from "./RobotHead";
 
 export function Astronaut(props) {
   const group = useRef();
@@ -58,6 +59,7 @@ export function Astronaut(props) {
           <group name="Root">
             <group name="metarig">
               <primitive object={nodes.metarig_rootJoint} />
+              <RobotHead nodes={nodes} />
               <skinnedMesh
                 name="Cube001_0"
                 geometry={nodes.Cube001_0.geometry}
