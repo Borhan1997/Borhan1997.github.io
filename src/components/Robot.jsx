@@ -171,6 +171,8 @@ export function Robot(props) {
   const lastPointer = useRef({ x: 0, y: 0 });
   const swing = useRef({ x: 0, y: 0 }); // antenna swing from mouse speed
   const waveT = useRef(0);
+  // Greeting: when the mouse first moves, wave back for a few seconds.
+  const greet = useRef({ start: null, weight: 0, done: false });
   const lean = useRef({ x: 0, y: 0 });
 
   const targetY = (props.position || [1.3, -0.5, 0])[1];
@@ -190,9 +192,20 @@ export function Robot(props) {
     const dx = clamp(pointer.x - screenPos.x, -1.2, 1.2);
     const dy = clamp(pointer.y - screenPos.y, -1, 1);
 
+    // First mouse move: wait for the entrance to settle, then wave back.
+    const g = greet.current;
+    if (!g.done && g.start === null && (pointer.x !== 0 || pointer.y !== 0)) {
+      g.start = Math.max(t, 2.5);
+    }
+    const waving = g.start !== null && t >= g.start && t < g.start + 3.2;
+    if (g.start !== null && t >= g.start + 3.2) g.done = true;
+    easing.damp(g, "weight", waving ? 1 : 0, 0.25, delta);
+    const greeting = g.weight;
+
     // Hover makes it excited; the cursor's speed swings the antennae.
     easing.damp(excite, "current", hovered.current ? 1 : 0, 0.25, delta);
     const e = excite.current;
+    const mood = Math.max(e, greeting * 0.8);
     const vx = pointer.x - lastPointer.current.x;
     const vy = pointer.y - lastPointer.current.y;
     lastPointer.current.x = pointer.x;
@@ -226,13 +239,13 @@ export function Robot(props) {
     easing.damp(
       eyes.current.scale,
       "y",
-      t % 5 < 0.15 ? 0.1 : 1 + e * 0.15,
+      t % 5 < 0.15 ? 0.1 : 1 + mood * 0.15,
       0.04,
       delta
     );
     // Bigger smile when hovered.
-    easing.damp(smile.current.scale, "x", 1 + e * 0.5, 0.2, delta);
-    easing.damp(smile.current.scale, "y", 1 + e * 0.6, 0.2, delta);
+    easing.damp(smile.current.scale, "x", 1 + mood * 0.5, 0.2, delta);
+    easing.damp(smile.current.scale, "y", 1 + mood * 0.6, 0.2, delta);
 
     // The raised arm waves faster the more excited it is, and tips toward
     // the cursor. The other limbs float loosely.
@@ -240,8 +253,17 @@ export function Robot(props) {
     const wave = waveT.current * W;
     armL.current.rotation.z = -1.5 + Math.sin(wave) * (0.08 + e * 0.12) - dx * 0.15;
     forearmL.current.rotation.z = -1.2 + Math.sin(wave * 2) * (0.12 + e * 0.35);
-    armR.current.rotation.z = 0.35 + Math.sin(p + 1.5) * 0.1 + e * 0.3;
-    forearmR.current.rotation.z = 0.25 + Math.sin(p * 2 + 1) * 0.1;
+    // The free arm raises and waves hello (mirror of the pointing arm).
+    armR.current.rotation.z = MathUtils.lerp(
+      0.35 + Math.sin(p + 1.5) * 0.1 + e * 0.3,
+      1.55 + Math.sin(t * 5) * 0.06,
+      greeting
+    );
+    forearmR.current.rotation.z = MathUtils.lerp(
+      0.25 + Math.sin(p * 2 + 1) * 0.1,
+      1.0 + Math.sin(t * 9) * 0.5,
+      greeting
+    );
     legL.current.rotation.x = Math.sin(p + 0.5) * 0.12 - swing.current.y * 0.1;
     shinL.current.rotation.x = 0.15 + Math.sin(p + 1) * 0.1;
     legR.current.rotation.x = Math.sin(p + 2.5) * 0.12 - swing.current.y * 0.1;
