@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ProjectDetails from "./ProjectDetails";
 
 const Project = ({
@@ -9,11 +9,18 @@ const Project = ({
   sourceCode,
   image,
   tags,
+  status = "active",
 }) => {
   const [isHidden, setIsHidden] = useState(false);
+  const isActive = status === "active";
+  const isWip = status === "wip";
   return (
     <>
-      <div className="flex flex-col overflow-hidden border rounded-2xl border-white/10 bg-gradient-to-l from-midnight to-navy hover-animation">
+      <div
+        className={`flex flex-col overflow-hidden border rounded-2xl border-white/10 bg-gradient-to-l from-midnight to-navy ${
+          isActive ? "hover-animation" : "opacity-60 grayscale"
+        }`}
+      >
         <img
           src={image}
           alt={title}
@@ -27,11 +34,24 @@ const Project = ({
             ))}
           </div>
           <button
-            onClick={() => setIsHidden(true)}
-            className="flex items-center gap-1 pt-5 mt-auto cursor-pointer hover-animation w-fit"
+            onClick={() => isActive && setIsHidden(true)}
+            disabled={!isActive}
+            className={`flex items-center gap-2 pt-5 mt-auto w-fit ${
+              isActive
+                ? "cursor-pointer hover-animation"
+                : "cursor-not-allowed"
+            }`}
           >
-            Read More
-            <img src="assets/arrow-right.svg" className="w-5" />
+            {isWip ? "Work in progress" : "Read More"}
+            {isWip ? (
+              <span
+                role="status"
+                aria-label="Work in progress"
+                className="inline-block w-5 h-5 border-2 rounded-full border-white/30 border-t-white animate-spin"
+              />
+            ) : (
+              <img src="assets/arrow-right.svg" className="w-5" />
+            )}
           </button>
         </div>
       </div>

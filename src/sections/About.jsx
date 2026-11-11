@@ -2,7 +2,6 @@ import { useRef } from "react";
 import Card from "../components/Card";
 import { TechSphere } from "../components/TechSphere";
 import CopyEmailButton from "../components/CopyEmailButton";
-import { Frameworks } from "../components/Frameworks";
 
 const About = () => {
   const grid2Container = useRef();
@@ -32,46 +31,42 @@ const About = () => {
             className="flex items-center justify-center w-full h-full"
           >
             <p className="flex items-end text-5xl text-gray-500">
-              CODE IS CRAFT
+              BEYOND THE CODE
             </p>
             <Card
-              style={{ rotate: "75deg", top: "30%", left: "20%" }}
-              text="GRASP"
+              style={{ rotate: "-8deg", top: "6%", left: "4%" }}
+              text="Photography"
+              color="#38bdf8"
               containerRef={grid2Container}
             />
             <Card
-              style={{ rotate: "-30deg", top: "60%", left: "45%" }}
-              text="SOLID"
+              style={{ rotate: "6deg", top: "8%", left: "52%" }}
+              text="AI"
+              color="#818cf8"
               containerRef={grid2Container}
             />
             <Card
-              style={{ rotate: "90deg", bottom: "30%", left: "70%" }}
-              text="Design Patterns"
+              style={{ rotate: "7deg", top: "38%", left: "2%" }}
+              text="Robotics"
+              color="#a78bfa"
               containerRef={grid2Container}
             />
             <Card
-              style={{ rotate: "-45deg", top: "55%", left: "0%" }}
-              text="Design Principles"
+              style={{ rotate: "-6deg", top: "40%", left: "50%" }}
+              text="Financial Markets"
+              color="#f472b6"
               containerRef={grid2Container}
             />
             <Card
-              style={{ rotate: "20deg", top: "10%", left: "38%" }}
-              text="SRP"
+              style={{ rotate: "-5deg", top: "68%", left: "8%" }}
+              text="Entrepreneurship"
+              color="#2dd4bf"
               containerRef={grid2Container}
             />
             <Card
-              style={{ rotate: "30deg", top: "70%", left: "70%" }}
-              image="assets/logos/csharp-pink.png"
-              containerRef={grid2Container}
-            />
-            <Card
-              style={{ rotate: "-45deg", top: "70%", left: "25%" }}
-              image="assets/logos/dotnet-pink.png"
-              containerRef={grid2Container}
-            />
-            <Card
-              style={{ rotate: "-45deg", top: "5%", left: "10%" }}
-              image="assets/logos/blazor-pink.png"
+              style={{ rotate: "8deg", top: "70%", left: "48%" }}
+              text="Kickboxing"
+              color="#fbbf24"
               containerRef={grid2Container}
             />
           </div>
@@ -95,19 +90,6 @@ const About = () => {
               Do you want to start a project together?
             </p>
             <CopyEmailButton />
-          </div>
-        </div>
-        {/* Grid 5 */}
-        <div className="grid-default-color grid-5">
-          <div className="z-10 w-[50%]">
-            <p className="headText">Tech Stack</p>
-            <p className="subtext">
-              I specialize in a variety of languages, frameworks, and tools that
-              allow me to build robust and scalable applications
-            </p>
-          </div>
-          <div className="absolute inset-y-0 md:inset-y-9 w-full h-full start-[50%] md:scale-125">
-            <Frameworks />
           </div>
         </div>
       </div>
