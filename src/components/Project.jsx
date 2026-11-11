@@ -9,33 +9,32 @@ const Project = ({
   sourceCode,
   image,
   tags,
-  setPreview,
 }) => {
   const [isHidden, setIsHidden] = useState(false);
   return (
     <>
-      <div
-        className="flex-wrap items-center justify-between py-10 space-y-14 sm:flex sm:space-y-0"
-        onMouseEnter={() => setPreview(image)}
-        onMouseLeave={() => setPreview(null)}
-      >
-        <div>
+      <div className="flex flex-col overflow-hidden border rounded-2xl border-white/10 bg-gradient-to-l from-midnight to-navy hover-animation">
+        <img
+          src={image}
+          alt={title}
+          className="object-cover w-full h-48"
+        />
+        <div className="flex flex-col flex-1 p-5">
           <p className="text-2xl">{title}</p>
-          <div className="flex gap-5 mt-2 text-sand">
+          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 text-sand">
             {tags.map((tag) => (
               <span key={tag.id}>{tag.name}</span>
             ))}
           </div>
+          <button
+            onClick={() => setIsHidden(true)}
+            className="flex items-center gap-1 pt-5 mt-auto cursor-pointer hover-animation w-fit"
+          >
+            Read More
+            <img src="assets/arrow-right.svg" className="w-5" />
+          </button>
         </div>
-        <button
-          onClick={() => setIsHidden(true)}
-          className="flex items-center gap-1 cursor-pointer hover-animation"
-        >
-          Read More
-          <img src="assets/arrow-right.svg" className="w-5" />
-        </button>
       </div>
-      <div className="bg-gradient-to-r from-transparent via-neutral-700 to-transparent h-[1px] w-full" />
       {isHidden && (
         <ProjectDetails
           title={title}

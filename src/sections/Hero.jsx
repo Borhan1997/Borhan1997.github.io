@@ -17,7 +17,7 @@ const Hero = () => {
   const x = useSpring(scrollYProgress, { damping: 50 });
   const robotY = useTransform(x, [0, 0.5], ["0%", "40%"]);
   return (
-    <section className="flex items-start justify-center min-h-screen overflow-hidden md:items-start md:justify-start c-space">
+    <section id="home" className="flex items-start justify-center min-h-screen overflow-hidden md:items-start md:justify-start c-space">
       <HeroText />
       <ParallaxBackground />
       <motion.figure
