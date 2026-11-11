@@ -1,6 +1,8 @@
 export const myProjects = [
   {
     id: 1,
+    // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
+    status: "active",
     title: "MLOps for a CV Model",
     description:
       "Automates the full lifecycle of a defect-detection model for industrial castings, from versioned data to a monitored, containerized API.",
@@ -63,8 +65,10 @@ export const myProjects = [
     ],
   },
   {
-    id: 7,
-    title: "Neural Ear: Audio Classification CNN",
+    id: 2,
+    // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
+    status: "active",
+    title: "Audio Classification CNN",
     description:
       "A ResNet-style convolutional network built from scratch in PyTorch that classifies 50 categories of environmental sound, paired with a web app that visualizes what the network sees.",
     subDescription: [
@@ -73,7 +77,7 @@ export const myProjects = [
       "Deployed the model as a FastAPI inference endpoint on Modal that returns the top-3 predictions together with the spectrogram, waveform and per-layer feature maps.",
       "Built a Next.js and React interface where you upload a .wav file and explore the predictions and the feature maps of every convolutional layer.",
     ],
-    href: "",
+    href: "https://cnnfromscratch-production.up.railway.app/",
     sourceCode: "https://github.com/Borhan1997/CNN_from_scratch",
     logo: "",
     image: "/assets/projects/neural-ear.jpg",
@@ -106,7 +110,9 @@ export const myProjects = [
     ],
   },
   {
-    id: 2,
+    id: 3,
+    // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
+    status: "wip",
     title: "Multimodal Emotion Recognition",
     description:
       "A secure authentication and authorization system using Auth0 for seamless user management.",
@@ -144,7 +150,139 @@ export const myProjects = [
     ],
   },
   {
-    id: 3,
+    id: 4,
+    // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
+    status: "disabled",
+    title: "AI Teammate for everyday Tasks",
+    description:
+      "Automates the full lifecycle of a defect-detection model for industrial castings, from versioned data to a monitored, containerized API.",
+    subDescription: [
+      "Built a reproducible ResNet18 training pipeline in PyTorch, with every run tracked in MLflow and datasets versioned with DVC on a DagsHub remote.",
+      "Implemented an automated evaluation gate that blocks any model whose defect recall drops below a set floor or regresses against the stored baseline.",
+      "Designed a CI/CD workflow with GitHub Actions that pulls data, trains, evaluates and gates each change, then publishes a Docker image to GHCR.",
+      "Added a FastAPI inference service with prediction logging, plus Prometheus and Grafana dashboards for drift monitoring.",
+    ],
+    href: "",
+    sourceCode: "",
+    logo: "",
+    image: "/assets/projects/ai-teammate.jpg",
+    tags: [
+      {
+        id: 1,
+        name: "Python",
+        path: "/assets/logos/python.svg",
+      },
+      {
+        id: 2,
+        name: "PyTorch",
+        path: "/assets/logos/pytorch.svg",
+      },
+      {
+        id: 3,
+        name: "MLflow",
+        path: "/assets/logos/mlflow.svg",
+      },
+      {
+        id: 4,
+        name: "DVC",
+        path: "/assets/logos/dvc.svg",
+      },
+      {
+        id: 5,
+        name: "GitHub Actions",
+        path: "/assets/logos/githubactions.svg",
+      },
+      {
+        id: 6,
+        name: "Docker",
+        path: "/assets/logos/docker.svg",
+      },
+      {
+        id: 7,
+        name: "FastAPI",
+        path: "/assets/logos/fastapi.svg",
+      },
+      {
+        id: 8,
+        name: "Prometheus",
+        path: "/assets/logos/prometheus.svg",
+      },
+      {
+        id: 9,
+        name: "Grafana",
+        path: "/assets/logos/grafana.svg",
+      },
+    ],
+  },
+  {
+    id: 5,
+    // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
+    status: "disabled",
+    title: "AI Game Generation Engine",
+    description:
+      "Automates the full lifecycle of a defect-detection model for industrial castings, from versioned data to a monitored, containerized API.",
+    subDescription: [
+      "Built a reproducible ResNet18 training pipeline in PyTorch, with every run tracked in MLflow and datasets versioned with DVC on a DagsHub remote.",
+      "Implemented an automated evaluation gate that blocks any model whose defect recall drops below a set floor or regresses against the stored baseline.",
+      "Designed a CI/CD workflow with GitHub Actions that pulls data, trains, evaluates and gates each change, then publishes a Docker image to GHCR.",
+      "Added a FastAPI inference service with prediction logging, plus Prometheus and Grafana dashboards for drift monitoring.",
+    ],
+    href: "",
+    sourceCode: "",
+    logo: "",
+    image: "/assets/projects/game-generation-engine.jpg",
+    tags: [
+      {
+        id: 1,
+        name: "Python",
+        path: "/assets/logos/python.svg",
+      },
+      {
+        id: 2,
+        name: "PyTorch",
+        path: "/assets/logos/pytorch.svg",
+      },
+      {
+        id: 3,
+        name: "MLflow",
+        path: "/assets/logos/mlflow.svg",
+      },
+      {
+        id: 4,
+        name: "DVC",
+        path: "/assets/logos/dvc.svg",
+      },
+      {
+        id: 5,
+        name: "GitHub Actions",
+        path: "/assets/logos/githubactions.svg",
+      },
+      {
+        id: 6,
+        name: "Docker",
+        path: "/assets/logos/docker.svg",
+      },
+      {
+        id: 7,
+        name: "FastAPI",
+        path: "/assets/logos/fastapi.svg",
+      },
+      {
+        id: 8,
+        name: "Prometheus",
+        path: "/assets/logos/prometheus.svg",
+      },
+      {
+        id: 9,
+        name: "Grafana",
+        path: "/assets/logos/grafana.svg",
+      },
+    ],
+  },
+  {
+    id: 6,
+    // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
+    status: "disabled",
     title: "Vision-Language Model (VLM) Fine-Tuning",
     description:
       "A modern, interactive web application built with Blazor WebAssembly and .NET Core.",
@@ -182,7 +320,9 @@ export const myProjects = [
     ],
   },
   {
-    id: 4,
+    id: 7,
+    // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
+    status: "disabled",
     title: "Real-Time Video Understanding System",
     description:
       "A lightweight C++ game engine designed for 2D and 3D game development.",
@@ -220,7 +360,9 @@ export const myProjects = [
     ],
   },
   {
-    id: 5,
+    id: 8,
+    // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
+    status: "disabled",
     title: "Diffusion-Based Synthetic Data Generator",
     description:
       "A fully customizable WordPress theme optimized for performance and SEO.",
@@ -258,7 +400,9 @@ export const myProjects = [
     ],
   },
   {
-    id: 6,
+    id: 9,
+    // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
+    status: "disabled",
     title: "Vision-Language-Action Agent in Simulation",
     description:
       "A web application that allows users to enroll in courses, watch video lectures, and take quizzes.",

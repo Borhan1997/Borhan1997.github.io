@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function MousePosition() {
   const [mousePosition, setMousePosition] = useState({
@@ -61,43 +61,6 @@ export const Particles = ({
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
   const rafID = useRef(null);
   const resizeTimeout = useRef(null);
-
-  useEffect(() => {
-    if (canvasRef.current) {
-      context.current = canvasRef.current.getContext("2d");
-    }
-    initCanvas();
-    animate();
-
-    const handleResize = () => {
-      if (resizeTimeout.current) {
-        clearTimeout(resizeTimeout.current);
-      }
-      resizeTimeout.current = setTimeout(() => {
-        initCanvas();
-      }, 200);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      if (rafID.current != null) {
-        window.cancelAnimationFrame(rafID.current);
-      }
-      if (resizeTimeout.current) {
-        clearTimeout(resizeTimeout.current);
-      }
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [color]);
-
-  useEffect(() => {
-    onMouseMove();
-  }, [mousePosition.x, mousePosition.y]);
-
-  useEffect(() => {
-    initCanvas();
-  }, [refresh]);
 
   const initCanvas = () => {
     resizeCanvas();
@@ -256,6 +219,49 @@ export const Particles = ({
     });
     rafID.current = window.requestAnimationFrame(animate);
   };
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      context.current = canvasRef.current.getContext("2d");
+    }
+    initCanvas();
+    animate();
+
+    const handleResize = () => {
+      if (resizeTimeout.current) {
+        clearTimeout(resizeTimeout.current);
+      }
+      resizeTimeout.current = setTimeout(() => {
+        initCanvas();
+      }, 200);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      if (rafID.current != null) {
+        window.cancelAnimationFrame(rafID.current);
+      }
+      if (resizeTimeout.current) {
+        clearTimeout(resizeTimeout.current);
+      }
+      window.removeEventListener("resize", handleResize);
+    };
+  // Intentionally keyed only on this value; the handlers are recreated every render.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [color]);
+
+  useEffect(() => {
+    onMouseMove();
+  // Intentionally keyed only on this value; the handlers are recreated every render.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mousePosition.x, mousePosition.y]);
+
+  useEffect(() => {
+    initCanvas();
+  // Intentionally keyed only on this value; the handlers are recreated every render.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refresh]);
 
   return (
     <div

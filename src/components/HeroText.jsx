@@ -2,7 +2,8 @@ import { FlipWords } from "./FlipWords";
 import { motion } from "motion/react";
 
 const HeroText = () => {
-  const words = ["Secure", "Modern", "Scalable"];
+  const words = ["Modern", "Reliable", "Scalable"];
+  const words_2 = ["Workflows", "Solutions", "Applications"];
   const variants = {
     hidden: { opacity: 0, x: -50 },
     visible: { opacity: 1, x: 0 },
@@ -42,13 +43,16 @@ const HeroText = () => {
             />
           </motion.div>
           <motion.p
-            className="text-4xl font-medium text-neutral-300"
+            className="text-5xl font-medium text-neutral-300"
             variants={variants}
             initial="hidden"
             animate="visible"
-            transition={{ delay: 1.8 }}
+            transition={{ delay: 1.2 }}
           >
-            AI Products and Solutions
+            AI-Powered <FlipWords
+              words={words_2}
+              className="font-black text-white text-5xl"
+            />
           </motion.p>
         </div>
       </div>
