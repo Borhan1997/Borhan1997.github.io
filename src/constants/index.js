@@ -13,7 +13,7 @@ export const myProjects = [
     href: "",
     sourceCode: "https://github.com/Borhan1997/casting-defect-MLOps",
     logo: "",
-    image: "/assets/projects/accessories.jpg",
+    image: "/assets/projects/mlops-pipeline.jpg",
     tags: [
       {
         id: 1,
