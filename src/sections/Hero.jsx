@@ -1,7 +1,7 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import HeroText from "../components/HeroText";
 import ParallaxBackground from "../components/parallaxBackground";
-import { Astronaut } from "../components/Astronaut";
+import { Robot } from "../components/Robot";
 import { Environment, Float, Lightformer } from "@react-three/drei";
 import { useMediaQuery } from "react-responsive";
 import { easing } from "maath";
@@ -33,19 +33,19 @@ const Hero = () => {
                 the lagoon below, magenta kicker from the sky */}
             <hemisphereLight args={["#ff9a5c", "#1f6f7a", 0.3]} />
             <directionalLight position={[4, 2, -3]} intensity={2.2} color="#ff8a50" />
-            <pointLight position={[-3, 2, 2]} intensity={2} color="#ca2f8c" />
+            <pointLight position={[-3, 2, 2]} intensity={1} color="#ca2f8c" />
             <pointLight position={[2, -2, 3]} intensity={2.5} color="#33c2cc" />
             <fog attach="fog" args={["#2a0f3a", 5, 14]} />
             <Environment resolution={128}>
               <Lightformer form="rect" intensity={3} color="#ff8a50" position={[0, 1, -6]} scale={[14, 4, 1]} />
-              <Lightformer form="rect" intensity={2} color="#ca2f8c" position={[-6, 3, 2]} rotation-y={Math.PI / 2} scale={[8, 6, 1]} />
+              <Lightformer form="rect" intensity={1} color="#ca2f8c" position={[-6, 3, 2]} rotation-y={Math.PI / 2} scale={[8, 6, 1]} />
               <Lightformer form="rect" intensity={2} color="#33c2cc" position={[5, -2, 3]} rotation-y={-Math.PI / 2} scale={[8, 4, 1]} />
-              <Lightformer form="rect" intensity={1.5} color="#7a57db" position={[0, 6, 0]} rotation-x={Math.PI / 2} scale={[10, 10, 1]} />
+              <Lightformer form="rect" intensity={0.4} color="#7a57db" position={[0, 6, 0]} rotation-x={Math.PI / 2} scale={[10, 10, 1]} />
             </Environment>
             <Float speed={0.7} rotationIntensity={0.6} floatIntensity={1.2}>
-              <Astronaut
-                scale={isMobile && 0.23}
-                position={isMobile && [0, -1.5, 0]}
+              <Robot
+                scale={isMobile ? 0.5 : 0.95}
+                position={isMobile ? [0, -1.2, 0] : [1.3, -0.5, 0]}
               />
             </Float>
             <Rig />
