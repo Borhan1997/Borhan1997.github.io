@@ -1,11 +1,11 @@
 import { RoundedBox } from "@react-three/drei";
 
 export const COLORS = {
-  steel: "#9298dc",
-  dark: "#555b9e",
+  steel: "#c98a7a",
+  dark: "#6b3a67",
   screen: "#030412",
-  eye: "#57db96",
-  trim: "#33c2cc",
+  eye: "#33e0d0",
+  trim: "#ea6a4a",
   tip: "#ca2f8c",
 };
 
