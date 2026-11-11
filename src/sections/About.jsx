@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import Card from "../components/Card";
-import { Globe } from "../components/globe";
+import { TechSphere } from "../components/TechSphere";
 import CopyEmailButton from "../components/CopyEmailButton";
 import { Frameworks } from "../components/Frameworks";
 
@@ -79,13 +79,13 @@ const About = () => {
         {/* Grid 3 */}
         <div className="grid-black-color grid-3">
           <div className="z-10 w-[50%]">
-            <p className="headtext">Time Zone</p>
+            <p className="headtext">My Toolbox</p>
             <p className="subtext">
-              I'm based in Toulouse (France), and open to remote work worldwide
+              The languages, frameworks and tools I build and ship with
             </p>
           </div>
-          <figure className="absolute left-[30%] top-[10%]">
-            <Globe />
+          <figure className="absolute left-[48%] top-[0%]">
+            <TechSphere />
           </figure>
         </div>
         {/* Grid 4 */}
