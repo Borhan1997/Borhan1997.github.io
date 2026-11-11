@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
-import { CanvasTexture, SRGBColorSpace } from "three";
+import { useEffect, useRef } from "react";
 import { RoundedBox } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useMotionValue, useSpring } from "motion/react";
@@ -11,6 +10,7 @@ const COLORS = {
   cyan: "#35dcef",
   purple: "#8a63c8",
   tip: "#f3c64f",
+  eye: "#57db96",
   button: "#e8683a",
 };
 
@@ -32,35 +32,6 @@ const Shell = ({ color = COLORS.shell }) => (
 const Glow = ({ color = COLORS.cyan }) => (
   <meshBasicMaterial color={color} toneMapped={false} />
 );
-
-// Dotted-mesh screen with a glowing "O", like the reference's eyes.
-function useEyeTexture() {
-  return useMemo(() => {
-    const c = document.createElement("canvas");
-    c.width = c.height = 256;
-    const g = c.getContext("2d");
-    g.fillStyle = "#06162a";
-    g.fillRect(0, 0, 256, 256);
-    g.fillStyle = "rgba(53,220,239,0.55)";
-    for (let y = 8; y < 256; y += 14) {
-      for (let x = 8; x < 256; x += 14) {
-        g.beginPath();
-        g.arc(x, y, 2.6, 0, Math.PI * 2);
-        g.fill();
-      }
-    }
-    g.strokeStyle = "#7af2ff";
-    g.lineWidth = 16;
-    g.shadowColor = "#35dcef";
-    g.shadowBlur = 18;
-    g.beginPath();
-    g.arc(128, 128, 62, 0, Math.PI * 2);
-    g.stroke();
-    const tex = new CanvasTexture(c);
-    tex.colorSpace = SRGBColorSpace;
-    return tex;
-  }, []);
-}
 
 const Ring = ({ radius, tube = 0.03, color = COLORS.cyan, ...props }) => (
   <mesh {...props}>
@@ -188,7 +159,6 @@ export function Robot(props) {
   const shinR = useRef();
   const antL = useRef();
   const antR = useRef();
-  const eyeTexture = useEyeTexture();
 
   const targetY = (props.position || [1.3, -0.5, 0])[1];
   const yPosition = useMotionValue(5);
@@ -280,21 +250,27 @@ export function Robot(props) {
           <capsuleGeometry args={[0.04, 0.12, 6, 10]} />
           <Glow color={COLORS.button} />
         </mesh>
-        {/* Eyes */}
-        <group ref={eyes}>
-          {[-1, 1].map((side) => (
-            <group
-              key={side}
-              position={[side * 0.4, -0.04, 0.73]}
-              rotation={[0, side * 0.45, 0]}
-            >
-              <mesh>
-                <circleGeometry args={[0.31, 40]} />
-                <meshBasicMaterial map={eyeTexture} toneMapped={false} />
-              </mesh>
-              <Ring radius={0.325} tube={0.04} color={COLORS.joint} />
-            </group>
+        {/* Screen face: dark visor with capsule eyes and a smile */}
+        <mesh position={[0, 0.0, 0.58]} scale={[0.66, 0.4, 0.24]}>
+          <sphereGeometry args={[1, 48, 32]} />
+          <meshPhysicalMaterial
+            color="#030412"
+            roughness={0.12}
+            metalness={0.6}
+            clearcoat={1}
+          />
+        </mesh>
+        <group ref={eyes} position={[0, 0.03, 0.82]}>
+          {[-0.2, 0.2].map((x) => (
+            <mesh key={x} position={[x, 0, 0]}>
+              <capsuleGeometry args={[0.065, 0.12, 6, 14]} />
+              <Glow color={COLORS.eye} />
+            </mesh>
           ))}
+          <mesh position={[0, -0.17, 0]} rotation={[0, 0, Math.PI]}>
+            <torusGeometry args={[0.11, 0.022, 8, 24, Math.PI]} />
+            <Glow color={COLORS.eye} />
+          </mesh>
         </group>
         {/* Ears */}
         {[-1, 1].map((side) => (
