@@ -3,6 +3,10 @@ import { RoundedBox } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useMotionValue, useSpring } from "motion/react";
 import { easing } from "maath";
+import { MathUtils, Vector3 } from "three";
+
+const clamp = MathUtils.clamp;
+const screenPos = new Vector3();
 
 const COLORS = {
   shell: "#8fb4d4",
@@ -158,6 +162,16 @@ export function Robot(props) {
   const shinR = useRef();
   const antL = useRef();
   const antR = useRef();
+  const smile = useRef();
+
+  // Interaction state, kept in refs so it never re-renders the scene.
+  const excite = useRef(0); // 0 = calm, 1 = hovered
+  const hovered = useRef(false);
+  const spin = useRef({ target: 0, value: 0 }); // click = full turn
+  const lastPointer = useRef({ x: 0, y: 0 });
+  const swing = useRef({ x: 0, y: 0 }); // antenna swing from mouse speed
+  const waveT = useRef(0);
+  const lean = useRef({ x: 0, y: 0 });
 
   const targetY = (props.position || [1.3, -0.5, 0])[1];
   const yPosition = useMotionValue(5);
@@ -169,29 +183,77 @@ export function Robot(props) {
   useFrame((state, delta) => {
     const t = state.clock.elapsedTime;
     const p = t * W;
-    root.current.position.y = ySpring.get() + Math.sin(p * 2) * 0.05;
-    root.current.rotation.z = Math.sin(p) * 0.06;
-    root.current.rotation.y = -0.35 + Math.sin(p + 1) * 0.08;
+    const { pointer, camera } = state;
 
-    // The head glances at the cursor a beat behind the body.
-    easing.damp(head.current.rotation, "y", state.pointer.x * 0.5, 0.45, delta);
-    easing.damp(head.current.rotation, "x", -state.pointer.y * 0.25, 0.45, delta);
-    head.current.rotation.z = Math.sin(p + 2) * 0.05;
+    // Where the cursor is relative to the robot, on screen (about -1..1).
+    root.current.getWorldPosition(screenPos).project(camera);
+    const dx = clamp(pointer.x - screenPos.x, -1.2, 1.2);
+    const dy = clamp(pointer.y - screenPos.y, -1, 1);
 
-    // Slow blink.
-    easing.damp(eyes.current.scale, "y", t % 5 < 0.15 ? 0.1 : 1, 0.04, delta);
+    // Hover makes it excited; the cursor's speed swings the antennae.
+    easing.damp(excite, "current", hovered.current ? 1 : 0, 0.25, delta);
+    const e = excite.current;
+    const vx = pointer.x - lastPointer.current.x;
+    const vy = pointer.y - lastPointer.current.y;
+    lastPointer.current.x = pointer.x;
+    lastPointer.current.y = pointer.y;
+    easing.damp(swing.current, "x", clamp(vx * 12, -1, 1), 0.15, delta);
+    easing.damp(swing.current, "y", clamp(vy * 12, -1, 1), 0.15, delta);
 
-    // Raised arm: slow wag of the pointing finger. Other limbs float loosely.
-    armL.current.rotation.z = -1.5 + Math.sin(p) * 0.08;
-    forearmL.current.rotation.z = -1.2 + Math.sin(p * 2) * 0.12;
-    armR.current.rotation.z = 0.35 + Math.sin(p + 1.5) * 0.1;
+    // Whole body: drifts toward the cursor, turns and leans to face it,
+    // bounces when hovered, and does a full turn when clicked.
+    easing.damp(lean.current, "x", dx, 0.5, delta);
+    easing.damp(lean.current, "y", dy, 0.5, delta);
+    easing.damp(spin.current, "value", spin.current.target, 0.7, delta);
+    root.current.position.x = (props.position || [1.3, -0.5, 0])[0] + lean.current.x * 0.15;
+    root.current.position.y =
+      ySpring.get() +
+      Math.sin(p * 2) * 0.05 +
+      lean.current.y * 0.08 +
+      e * Math.abs(Math.sin(t * 6)) * 0.1;
+    root.current.rotation.z = Math.sin(p) * 0.06 - lean.current.x * 0.1;
+    root.current.rotation.y =
+      -0.35 + Math.sin(p + 1) * 0.08 + lean.current.x * 0.2 + spin.current.value;
+
+    // The head turns to look at the cursor, a beat behind the body.
+    easing.damp(head.current.rotation, "y", dx * 0.5, 0.35, delta);
+    easing.damp(head.current.rotation, "x", -dy * 0.4, 0.35, delta);
+    head.current.rotation.z = Math.sin(p + 2) * 0.05 - dx * 0.08;
+
+    // Eyes slide toward the cursor inside the visor, and blink.
+    easing.damp(eyes.current.position, "x", dx * 0.1, 0.2, delta);
+    easing.damp(eyes.current.position, "y", 0.03 + dy * 0.06, 0.2, delta);
+    easing.damp(
+      eyes.current.scale,
+      "y",
+      t % 5 < 0.15 ? 0.1 : 1 + e * 0.15,
+      0.04,
+      delta
+    );
+    // Bigger smile when hovered.
+    easing.damp(smile.current.scale, "x", 1 + e * 0.5, 0.2, delta);
+    easing.damp(smile.current.scale, "y", 1 + e * 0.6, 0.2, delta);
+
+    // The raised arm waves faster the more excited it is, and tips toward
+    // the cursor. The other limbs float loosely.
+    waveT.current += delta * (1 + e * 5);
+    const wave = waveT.current * W;
+    armL.current.rotation.z = -1.5 + Math.sin(wave) * (0.08 + e * 0.12) - dx * 0.15;
+    forearmL.current.rotation.z = -1.2 + Math.sin(wave * 2) * (0.12 + e * 0.35);
+    armR.current.rotation.z = 0.35 + Math.sin(p + 1.5) * 0.1 + e * 0.3;
     forearmR.current.rotation.z = 0.25 + Math.sin(p * 2 + 1) * 0.1;
-    legL.current.rotation.x = Math.sin(p + 0.5) * 0.12;
+    legL.current.rotation.x = Math.sin(p + 0.5) * 0.12 - swing.current.y * 0.1;
     shinL.current.rotation.x = 0.15 + Math.sin(p + 1) * 0.1;
-    legR.current.rotation.x = Math.sin(p + 2.5) * 0.12;
+    legR.current.rotation.x = Math.sin(p + 2.5) * 0.12 - swing.current.y * 0.1;
     shinR.current.rotation.x = 0.15 + Math.sin(p + 3) * 0.1;
-    antL.current.rotation.z = 0.4 + Math.sin(p * 2 + 0.5) * 0.12;
-    antR.current.rotation.z = -0.4 + Math.sin(p * 2 + 2) * 0.12;
+
+    // Antennae whip against the direction the mouse moves.
+    antL.current.rotation.z =
+      0.4 + Math.sin(p * 2 + 0.5) * 0.12 + swing.current.x * 0.5;
+    antR.current.rotation.z =
+      -0.4 + Math.sin(p * 2 + 2) * 0.12 + swing.current.x * 0.5;
+    antL.current.rotation.x = -swing.current.y * 0.4;
+    antR.current.rotation.x = -swing.current.y * 0.4;
   });
 
   return (
@@ -202,6 +264,19 @@ export function Robot(props) {
       {...props}
       scale={props.scale || 0.85}
       position={props.position || [1.3, -0.5, 0]}
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        hovered.current = true;
+        document.body.style.cursor = "pointer";
+      }}
+      onPointerOut={() => {
+        hovered.current = false;
+        document.body.style.cursor = "";
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        spin.current.target += Math.PI * 2;
+      }}
     >
       {/* Body */}
       <RoundedBox args={[0.72, 0.78, 0.56]} radius={0.22} smoothness={5}>
@@ -266,10 +341,12 @@ export function Robot(props) {
               <Glow color={COLORS.eye} />
             </mesh>
           ))}
-          <mesh position={[0, -0.17, 0]} rotation={[0, 0, Math.PI]}>
+          <group ref={smile} position={[0, -0.17, 0]}>
+          <mesh rotation={[0, 0, Math.PI]}>
             <torusGeometry args={[0.11, 0.022, 8, 24, Math.PI]} />
             <Glow color={COLORS.eye} />
           </mesh>
+          </group>
         </group>
         {/* Ears */}
         {[-1, 1].map((side) => (
