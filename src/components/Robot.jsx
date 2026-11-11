@@ -9,7 +9,6 @@ const COLORS = {
   joint: "#27364a",
   cyan: "#35dcef",
   purple: "#8a63c8",
-  tip: "#f3c64f",
   eye: "#57db96",
   button: "#e8683a",
 };
@@ -314,7 +313,7 @@ export function Robot(props) {
             </mesh>
             <mesh position={[0, 0.46, 0]}>
               <sphereGeometry args={[0.085, 20, 16]} />
-              <Glow color={COLORS.tip} />
+              <Glow color={COLORS.eye} />
             </mesh>
             <Ring radius={0.1} tube={0.016} position={[0, 0.46, 0]} />
           </group>
