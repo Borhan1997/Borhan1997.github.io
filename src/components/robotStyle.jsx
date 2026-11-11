@@ -1,16 +1,18 @@
 import { RoundedBox } from "@react-three/drei";
 
 export const COLORS = {
-  steel: "#a98378",
-  dark: "#5a3b5e",
+  steel: "#8f6d6b",
+  dark: "#4a3050",
   screen: "#030412",
   eye: "#33e0d0",
-  trim: "#c4684c",
+  trim: "#b5583f",
   tip: "#ca2f8c",
 };
 
-// Same 6.67 s loop as the model's idle animation.
-export const W = (Math.PI * 2) / 6.667;
+// The idle animation plays in slow motion for a heavier, cinematic feel.
+export const SPEED = 0.65;
+// Same loop length as the model's idle animation at that speed.
+export const W = (Math.PI * 2) / (6.667 / SPEED);
 
 // Matte painted plating: no gloss, no glow. Colors come from the
 // background palette and are shaded by the scene lights only.

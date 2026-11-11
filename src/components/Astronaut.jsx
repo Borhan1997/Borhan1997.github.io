@@ -12,6 +12,7 @@ import { useMotionValue, useSpring } from "motion/react";
 import { useFrame } from "@react-three/fiber";
 import { RobotHead } from "./RobotHead";
 import { RobotBody } from "./RobotBody";
+import { SPEED } from "./robotStyle";
 
 export function Astronaut(props) {
   const group = useRef();
@@ -22,7 +23,9 @@ export function Astronaut(props) {
 
   useEffect(() => {
     if (animations.length > 0) {
-      actions[animations[0].name]?.play();
+      const action = actions[animations[0].name];
+      action?.setEffectiveTimeScale(SPEED);
+      action?.play();
     }
   }, [actions, animations]);
 
