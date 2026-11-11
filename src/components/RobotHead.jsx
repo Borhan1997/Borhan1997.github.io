@@ -1,56 +1,20 @@
-import { useMemo, useRef } from "react";
-import { RoundedBox } from "@react-three/drei";
+import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import {
-  DataTexture,
-  Matrix4,
-  NearestFilter,
-  RedFormat,
-  Vector3,
-} from "three";
+import { Matrix4, Vector3 } from "three";
+import { COLORS, Plate, W, useCelGradient } from "./robotStyle";
 
 const ONE = new Vector3(1, 1, 1);
 const m = new Matrix4();
 const inv = new Matrix4();
 
-const STEEL = "#4a4f8a";
-const SCREEN = "#030412";
-const EYE = "#57db96";
-const TRIM = "#33c2cc";
-
-// Same 6.67 s loop as the body's idle animation.
-const W = (Math.PI * 2) / 6.667;
-
-// Three flat shading steps, like the painted shading on the body texture.
-const useCelGradient = () =>
-  useMemo(() => {
-    const tex = new DataTexture(new Uint8Array([90, 170, 255]), 3, 1, RedFormat);
-    tex.minFilter = tex.magFilter = NearestFilter;
-    tex.needsUpdate = true;
-    return tex;
-  }, []);
-
-// A faceted cel-shaded box with a thick black outline, to match the
-// hand-drawn look of the body.
-const Plate = ({ size, radius, color, gradient, position = [0, 0, 0] }) => (
-  <group position={position}>
-    <RoundedBox args={size} radius={radius} smoothness={2}>
-      <meshToonMaterial color={color} gradientMap={gradient} />
-    </RoundedBox>
-    <RoundedBox
-      args={size.map((s) => s + 0.3)}
-      radius={radius}
-      smoothness={2}
-    >
-      <meshBasicMaterial color="#000000" side={1} />
-    </RoundedBox>
-  </group>
-);
+const STEEL = COLORS.steel;
+const SCREEN = COLORS.screen;
+const EYE = COLORS.eye;
+const TRIM = COLORS.trim;
 
 /**
  * Screen-face bot head that replaces the astronaut's helmet.
- * The helmet is hidden by collapsing the head bone, and this head
- * follows that bone (position + rotation only) every frame.
+ * This head follows the head bone (position + rotation only) every frame.
  */
 export function RobotHead({ nodes }) {
   const ref = useRef();
@@ -63,7 +27,6 @@ export function RobotHead({ nodes }) {
     const bone = nodes.spine006_metarig;
     const parent = bone.parent;
     // Runs after the animation mixer, so the bone's local transform is current.
-    bone.scale.setScalar(0.0001);
     parent.updateWorldMatrix(true, false);
     m.compose(bone.position, bone.quaternion, ONE).premultiply(
       parent.matrixWorld
@@ -90,7 +53,7 @@ export function RobotHead({ nodes }) {
       <ambientLight intensity={1.2} />
       <directionalLight position={[5, 8, 10]} intensity={2.5} />
       <group ref={ref}>
-        <group ref={face} position={[0, 1.2, 0.2]} scale={0.72}>
+        <group ref={face} position={[0, 1.0, 0.2]} scale={0.62}>
           <Plate size={[4.6, 3.8, 3.8]} radius={0.9} color={STEEL} gradient={gradient} />
           {/* Screen face */}
           <Plate
