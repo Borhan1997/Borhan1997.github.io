@@ -76,7 +76,7 @@ export const myProjects = [
     href: "",
     sourceCode: "",
     logo: "",
-    image: "/assets/projects/auth-system.jpg",
+    image: "/assets/projects/emotion-recognition.jpg",
     tags: [
       {
         id: 1,
@@ -114,7 +114,7 @@ export const myProjects = [
     href: "",
     sourceCode: "",
     logo: "",
-    image: "/assets/projects/blazor-app.jpg",
+    image: "/assets/projects/vlm-finetuning.jpg",
     tags: [
       {
         id: 1,
@@ -152,7 +152,7 @@ export const myProjects = [
     href: "",
     sourceCode: "",
     logo: "",
-    image: "/assets/projects/game-engine.jpg",
+    image: "/assets/projects/video-understanding.jpg",
     tags: [
       {
         id: 1,
@@ -190,7 +190,7 @@ export const myProjects = [
     href: "",
     sourceCode: "",
     logo: "",
-    image: "/assets/projects/wordpress-theme.jpg",
+    image: "/assets/projects/synthetic-data.jpg",
     tags: [
       {
         id: 1,
@@ -228,7 +228,7 @@ export const myProjects = [
     href: "",
     sourceCode: "",
     logo: "",
-    image: "/assets/projects/elearning.jpg",
+    image: "/assets/projects/vla-agent.jpg",
     tags: [
       {
         id: 1,
