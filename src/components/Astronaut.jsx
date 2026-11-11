@@ -7,7 +7,8 @@ Title: Tenhun Falling spaceman (FanArt)
 */
 
 import React, { useEffect, useRef } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import { useGLTF, useAnimations, useTexture } from "@react-three/drei";
+import { SRGBColorSpace } from "three";
 import { useMotionValue, useSpring } from "motion/react";
 import { useFrame } from "@react-three/fiber";
 
@@ -17,6 +18,18 @@ export function Astronaut(props) {
     "/models/tenhun_falling_spaceman_fanart.glb"
   );
   const { actions } = useAnimations(animations, group);
+
+  // Robot paint job: same model and animation, recolored texture
+  // (steel-blue plating, neon-cyan trim, green screen face).
+  const robotMap = useTexture("/models/robot-texture.png", (tex) => {
+    tex.flipY = false;
+    tex.colorSpace = SRGBColorSpace;
+  });
+  useEffect(() => {
+    const material = materials["AstronautFallingTexture.png"];
+    material.map = robotMap;
+    material.needsUpdate = true;
+  }, [materials, robotMap]);
   useEffect(() => {
     if (animations.length > 0) {
       actions[animations[0].name]?.play();
@@ -128,3 +141,4 @@ export function Astronaut(props) {
 }
 
 useGLTF.preload("/models/tenhun_falling_spaceman_fanart.glb");
+useTexture.preload("/models/robot-texture.png");
