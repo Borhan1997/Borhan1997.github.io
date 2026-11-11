@@ -21,10 +21,10 @@ const Hero = () => {
         <Canvas camera={{ position: [0, 1, 3] }}>
           <Suspense fallback={<Loader />}>
             {/* Light the robot with the colors of the painted sky */}
-            <ambientLight intensity={0.9} color="#7a57db" />
-            <directionalLight position={[4, 2, -3]} intensity={3} color="#ff9a5c" />
-            <pointLight position={[-3, 2, 2]} intensity={14} color="#ca2f8c" />
-            <pointLight position={[2, -2, 3]} intensity={10} color="#33c2cc" />
+            <ambientLight intensity={0.7} color="#7a57db" />
+            <directionalLight position={[4, 2, -3]} intensity={1.8} color="#ff9a5c" />
+            <pointLight position={[-3, 2, 2]} intensity={4} color="#ca2f8c" />
+            <pointLight position={[2, -2, 3]} intensity={3} color="#33c2cc" />
             <Environment resolution={128}>
               <Lightformer form="rect" intensity={3} color="#ff8a50" position={[0, 1, -6]} scale={[14, 4, 1]} />
               <Lightformer form="rect" intensity={2} color="#ca2f8c" position={[-6, 3, 2]} rotation-y={Math.PI / 2} scale={[8, 6, 1]} />

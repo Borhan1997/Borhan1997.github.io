@@ -1,51 +1,27 @@
 import { RoundedBox } from "@react-three/drei";
 
 export const COLORS = {
-  steel: "#c98a7a",
-  dark: "#6b3a67",
+  steel: "#a98378",
+  dark: "#5a3b5e",
   screen: "#030412",
   eye: "#33e0d0",
-  trim: "#ea6a4a",
+  trim: "#c4684c",
   tip: "#ca2f8c",
 };
 
 // Same 6.67 s loop as the model's idle animation.
 export const W = (Math.PI * 2) / 6.667;
 
-// Brushed-metal plating, glossy glass for the screen and softly glowing
-// trim, all lit by the sunset colors of the background.
-export const Material = ({ color }) => {
-  if (color === COLORS.screen) {
-    return (
-      <meshPhysicalMaterial
-        color={color}
-        metalness={0.9}
-        roughness={0.05}
-        clearcoat={1}
-        envMapIntensity={1.4}
-      />
-    );
-  }
-  if (color === COLORS.trim) {
-    return (
-      <meshStandardMaterial
-        color={color}
-        metalness={0.5}
-        roughness={0.3}
-        emissive={color}
-        emissiveIntensity={0.4}
-      />
-    );
-  }
-  return (
-    <meshStandardMaterial
-      color={color}
-      metalness={0.75}
-      roughness={0.32}
-      envMapIntensity={1.3}
-    />
-  );
-};
+// Matte painted plating: no gloss, no glow. Colors come from the
+// background palette and are shaded by the scene lights only.
+export const Material = ({ color }) => (
+  <meshStandardMaterial
+    color={color}
+    metalness={0.05}
+    roughness={0.85}
+    envMapIntensity={0.25}
+  />
+);
 
 export const Plate = ({
   size,
