@@ -63,6 +63,49 @@ export const myProjects = [
     ],
   },
   {
+    id: 7,
+    title: "Neural Ear: Audio Classification CNN",
+    description:
+      "A ResNet-style convolutional network built from scratch in PyTorch that classifies 50 categories of environmental sound, paired with a web app that visualizes what the network sees.",
+    subDescription: [
+      "Designed a custom ResNet-18-style CNN (residual blocks in a 3-4-6-3 layout, no pretrained weights) that classifies log-mel spectrograms of ESC-50 audio clips, reaching 80.25% validation accuracy across 50 classes.",
+      "Trained with mixup, frequency and time masking, label smoothing and AdamW with a OneCycle schedule, on serverless A10 GPUs with Modal and TensorBoard tracking.",
+      "Deployed the model as a FastAPI inference endpoint on Modal that returns the top-3 predictions together with the spectrogram, waveform and per-layer feature maps.",
+      "Built a Next.js and React interface where you upload a .wav file and explore the predictions and the feature maps of every convolutional layer.",
+    ],
+    href: "",
+    sourceCode: "https://github.com/Borhan1997/CNN_from_scratch",
+    logo: "",
+    image: "/assets/projects/neural-ear.jpg",
+    tags: [
+      {
+        id: 1,
+        name: "Python",
+        path: "/assets/logos/python.svg",
+      },
+      {
+        id: 2,
+        name: "PyTorch",
+        path: "/assets/logos/pytorch.svg",
+      },
+      {
+        id: 3,
+        name: "FastAPI",
+        path: "/assets/logos/fastapi.svg",
+      },
+      {
+        id: 4,
+        name: "React",
+        path: "/assets/logos/react.svg",
+      },
+      {
+        id: 5,
+        name: "TailwindCSS",
+        path: "/assets/logos/tailwindcss.svg",
+      },
+    ],
+  },
+  {
     id: 2,
     title: "Multimodal Emotion Recognition",
     description:
