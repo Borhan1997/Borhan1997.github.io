@@ -126,28 +126,7 @@ export const myProjects = [
     sourceCode: "",
     logo: "",
     image: "/assets/projects/emotion-recognition.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "Auth0",
-        path: "/assets/logos/auth0.svg",
-      },
-      {
-        id: 2,
-        name: "React",
-        path: "/assets/logos/react.svg",
-      },
-      {
-        id: 3,
-        name: "SQLite",
-        path: "/assets/logos/sqlite.svg",
-      },
-      {
-        id: 4,
-        name: "TailwindCSS",
-        path: "/assets/logos/tailwindcss.svg",
-      },
-    ],
+    tags: [],
   },
   {
     id: 4,
@@ -166,53 +145,7 @@ export const myProjects = [
     sourceCode: "",
     logo: "",
     image: "/assets/projects/ai-teammate.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "Python",
-        path: "/assets/logos/python.svg",
-      },
-      {
-        id: 2,
-        name: "PyTorch",
-        path: "/assets/logos/pytorch.svg",
-      },
-      {
-        id: 3,
-        name: "MLflow",
-        path: "/assets/logos/mlflow.svg",
-      },
-      {
-        id: 4,
-        name: "DVC",
-        path: "/assets/logos/dvc.svg",
-      },
-      {
-        id: 5,
-        name: "GitHub Actions",
-        path: "/assets/logos/githubactions.svg",
-      },
-      {
-        id: 6,
-        name: "Docker",
-        path: "/assets/logos/docker.svg",
-      },
-      {
-        id: 7,
-        name: "FastAPI",
-        path: "/assets/logos/fastapi.svg",
-      },
-      {
-        id: 8,
-        name: "Prometheus",
-        path: "/assets/logos/prometheus.svg",
-      },
-      {
-        id: 9,
-        name: "Grafana",
-        path: "/assets/logos/grafana.svg",
-      },
-    ],
+    tags: [],
   },
   {
     id: 5,
@@ -231,53 +164,7 @@ export const myProjects = [
     sourceCode: "",
     logo: "",
     image: "/assets/projects/game-generation-engine.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "Python",
-        path: "/assets/logos/python.svg",
-      },
-      {
-        id: 2,
-        name: "PyTorch",
-        path: "/assets/logos/pytorch.svg",
-      },
-      {
-        id: 3,
-        name: "MLflow",
-        path: "/assets/logos/mlflow.svg",
-      },
-      {
-        id: 4,
-        name: "DVC",
-        path: "/assets/logos/dvc.svg",
-      },
-      {
-        id: 5,
-        name: "GitHub Actions",
-        path: "/assets/logos/githubactions.svg",
-      },
-      {
-        id: 6,
-        name: "Docker",
-        path: "/assets/logos/docker.svg",
-      },
-      {
-        id: 7,
-        name: "FastAPI",
-        path: "/assets/logos/fastapi.svg",
-      },
-      {
-        id: 8,
-        name: "Prometheus",
-        path: "/assets/logos/prometheus.svg",
-      },
-      {
-        id: 9,
-        name: "Grafana",
-        path: "/assets/logos/grafana.svg",
-      },
-    ],
+    tags: [],
   },
   {
     id: 6,
@@ -296,28 +183,7 @@ export const myProjects = [
     sourceCode: "",
     logo: "",
     image: "/assets/projects/vlm-finetuning.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "Blazor",
-        path: "/assets/logos/blazor.svg",
-      },
-      {
-        id: 2,
-        name: ".NET Core",
-        path: "/assets/logos/dotnetcore.svg",
-      },
-      {
-        id: 3,
-        name: "SQLite",
-        path: "/assets/logos/sqlite.svg",
-      },
-      {
-        id: 4,
-        name: "TailwindCSS",
-        path: "/assets/logos/tailwindcss.svg",
-      },
-    ],
+    tags: [],
   },
   {
     id: 7,
@@ -336,28 +202,7 @@ export const myProjects = [
     sourceCode: "",
     logo: "",
     image: "/assets/projects/video-understanding.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "C++",
-        path: "/assets/logos/cplusplus.svg",
-      },
-      {
-        id: 2,
-        name: "C#",
-        path: "/assets/logos/csharp.svg",
-      },
-      {
-        id: 3,
-        name: "Git",
-        path: "/assets/logos/git.svg",
-      },
-      {
-        id: 4,
-        name: "Microsoft",
-        path: "/assets/logos/microsoft.svg",
-      },
-    ],
+    tags: [],
   },
   {
     id: 8,
@@ -376,28 +221,7 @@ export const myProjects = [
     sourceCode: "",
     logo: "",
     image: "/assets/projects/synthetic-data.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "WordPress",
-        path: "/assets/logos/wordpress.svg",
-      },
-      {
-        id: 2,
-        name: "HTML5",
-        path: "/assets/logos/html5.svg",
-      },
-      {
-        id: 3,
-        name: "CSS3",
-        path: "/assets/logos/css3.svg",
-      },
-      {
-        id: 4,
-        name: "Vite.js",
-        path: "/assets/logos/vitejs.svg",
-      },
-    ],
+    tags: [],
   },
   {
     id: 9,
@@ -416,28 +240,7 @@ export const myProjects = [
     sourceCode: "",
     logo: "",
     image: "/assets/projects/vla-agent.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "Blazor",
-        path: "/assets/logos/blazor.svg",
-      },
-      {
-        id: 2,
-        name: "Azure",
-        path: "/assets/logos/azure.svg",
-      },
-      {
-        id: 3,
-        name: "Stripe",
-        path: "/assets/logos/stripe.svg",
-      },
-      {
-        id: 4,
-        name: "TailwindCSS",
-        path: "/assets/logos/tailwindcss.svg",
-      },
-    ],
+    tags: [],
   },
 ];
 
@@ -461,36 +264,39 @@ export const mySocials = [
 
 export const experiences = [
   {
-    title: "Software Developer",
-    job: "Security & Defense Projects",
-    date: "2021-2023",
+    title: "Mechanical Project Engineer",
+    job: "Al Khaleej Sugar Co.",
+    location: "Dubai, UAE",
+    date: "Sep 2019 – Aug 2021",
     contents: [
-      "Enhanced application security and developed new features, adhering to standards set by the Passive Defense Organization and National Cyberspace Center.",
-      "Designed and implemented intuitive map interfaces using MapsUI, enhancing user experience and enabling seamless interactive map integration.",
-      "Developed applications for industrial automation, leveraging C++ and the Fatek API for PLC communication.",
-      "Enhanced responsiveness and usability of applications using Windows Forms and WPF frameworks.",
-      "Executed XML to SVG conversions using X-DOM, ensuring dynamic and efficient data visualization.",
+      "Tracked project schedules and budgets, and reported progress to department executives through status reports and project documentation.",
+      "Coordinated installation, modification or upgrade of mechanical equipment (pumps, conveyors, boilers, piping) across production, maintenance, procurement and contractors to keep work on schedule.",
+      "Followed HSE (health, safety and environment) and quality procedures during project execution.",
+      "Reviewed technical drawings, specifications and vendor quotations.",
     ],
   },
   {
-    title: "Back-End Developer",
-    job: "Car Manufacture",
-    date: "2023-2024",
+    title: "Control & Simulation Engineer (MSc Thesis Internship)",
+    job: "Wind Fisher SAS",
+    location: "Montbonnot-Saint-Martin, France",
+    date: "Feb 2022 – Aug 2022",
     contents: [
-      "Engineered systems for large-scale data ingestion and analysis, ensuring efficient data processing and storage.",
-      "Developed back-end systems enabling vehicle-to-cloud communication for telemetry, diagnostics, and remote control:",
-      "✅ Implemented secure APIs, following ISO 26262 automotive safety standards.",
-      "✅ Ensured data privacy for customers and partners through industry-compliant protocols.",
-      "✅ Delivered remote features like over-the-air updates, real-time tracking, and remote start capabilities.",
+      "Developed and prototyped embedded control systems for an autonomous energy-generation platform.",
+      "Processed and analyzed real-time avionics and sensor data to inform control algorithm design and validation.",
+      "Designed and implemented control and command algorithms, translating theoretical models into embedded code.",
+      "Built full-system simulation models to estimate and validate energy production performance before physical testing.",
     ],
   },
   {
-    title: "Freelance Developer",
-    job: "Self-Employed",
-    date: "2025-Present",
+    title: "Associate Digital Engineer — C++/Qt Software Engineer",
+    job: "Capgemini Engineering (Aerospace projects)",
+    location: "Toulouse, France",
+    date: "Nov 2022 – Present",
     contents: [
-      "Created a personal portfolio using Three.js, React, Vite, and WebAPI to showcase technical expertise.",
-      "Continuously enhancing technical skills and expanding expertise in modern web development and back-end technologies.",
+      "Design and develop software components and system-level features in C++ and Qt on Linux for aerospace products.",
+      "Conduct code reviews, debugging and troubleshooting to maintain the quality and reliability of delivered software.",
+      "Own build and release workflows with GitHub, Jenkins and Artifactory in a CI/CD pipeline; plan and triage work in Jira.",
+      "Work with cross-functional stakeholders to turn requirements into technical solutions and maintain development documentation to project standards.",
     ],
   },
 ];

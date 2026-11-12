@@ -4,24 +4,30 @@ import { Html, OrbitControls } from "@react-three/drei";
 
 const LOGOS = [
   "python",
+  "cplusplus",
+  "qt",
+  "linux",
+  "ros",
   "pytorch",
+  "langchain",
+  "streamlit",
+  "modal",
   "mlflow",
+  "dvc",
   "docker",
-  "fastapi",
-  "csharp",
-  "dotnet",
-  "blazor",
-  "azure",
-  "react",
-  "javascript",
-  "tailwindcss",
-  "vitejs",
-  "threejs",
-  "git",
   "githubactions",
+  "jenkins",
+  "jfrog",
+  "jira",
+  "git",
+  "fastapi",
+  "prometheus",
+  "grafana",
+  "react",
+  "tailwindcss",
 ];
 
-const RADIUS = 1.6;
+const RADIUS = 1.9;
 
 // Spread points evenly over a sphere (Fibonacci lattice).
 const spherePoints = (count, radius) =>

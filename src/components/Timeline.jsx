@@ -38,14 +38,28 @@ export const Timeline = ({ data }) => {
               <div className="flex-col hidden gap-2 text-xl font-bold md:flex md:pl-20 md:text-4xl text-neutral-300">
                 <h3>{item.date}</h3>
                 <h3 className="text-3xl text-neutral-400">{item.title}</h3>
-                <h3 className="text-3xl text-neutral-500">{item.job}</h3>
+                <h3 className="text-xl font-semibold text-neutral-500">
+                  {item.job}
+                </h3>
+                {item.location && (
+                  <h3 className="text-base font-normal text-neutral-600">
+                    {item.location}
+                  </h3>
+                )}
               </div>
             </div>
 
             <div className="relative w-full pl-20 pr-4 md:pl-4">
               <div className="block mb-4 text-2xl font-bold text-left text-neutral-300 md:hidden ">
                 <h3>{item.date}</h3>
-                <h3>{item.job}</h3>
+                <h3 className="text-lg font-semibold text-neutral-400">
+                  {item.job}
+                </h3>
+                {item.location && (
+                  <h3 className="text-base font-normal text-neutral-500">
+                    {item.location}
+                  </h3>
+                )}
               </div>
               {item.contents.map((content, index) => (
                 <p className="mb-3 font-normal text-neutral-400" key={index}>
