@@ -26,14 +26,14 @@ const Card = ({ style, text, image, color, containerRef }) => {
 
   return image && !text ? (
     <motion.img
-      className="absolute w-15 cursor-grab"
+      className="absolute w-15 cursor-grab touch-pan-y!"
       src={image}
       style={{ ...position, rotate }}
       {...dragProps}
     />
   ) : (
     <motion.div
-      className="absolute px-1 py-4 text-xl text-center border rounded-full select-none font-extralight w-[12rem] cursor-grab backdrop-blur-sm"
+      className="absolute px-1 py-4 text-base md:text-xl text-center border rounded-full select-none font-extralight w-[9.5rem] md:w-[12rem] cursor-grab touch-pan-y! backdrop-blur-sm"
       style={{
         ...position,
         rotate,

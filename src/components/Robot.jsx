@@ -180,9 +180,14 @@ export function Robot(props) {
     const dx = clamp(pointer.x - screenPos.x, -1.2, 1.2);
     const dy = clamp(pointer.y - screenPos.y, -1, 1);
 
-    // First mouse move: wait for the entrance to settle, then wave back.
+    // First mouse move (or, with no mouse e.g. on touch, after a short idle):
+    // wait for the entrance to settle, then wave.
     const g = greet.current;
-    if (!g.done && g.start === null && (pointer.x !== 0 || pointer.y !== 0)) {
+    if (
+      !g.done &&
+      g.start === null &&
+      (pointer.x !== 0 || pointer.y !== 0 || t > 3.5)
+    ) {
       g.start = Math.max(t, 2.5);
     }
     const waving = g.start !== null && t >= g.start && t < g.start + 3.2;

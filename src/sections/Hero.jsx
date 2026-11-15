@@ -17,15 +17,16 @@ const Hero = () => {
   const x = useSpring(scrollYProgress, { damping: 50 });
   const robotY = useTransform(x, [0, 0.5], ["0%", "40%"]);
   return (
-    <section id="home" className="flex items-start justify-center min-h-screen overflow-hidden md:items-start md:justify-start c-space">
+    <section id="home" className="flex items-start justify-center min-h-svh overflow-hidden md:items-start md:justify-start c-space">
       <HeroText />
       <ParallaxBackground />
       <motion.figure
         className="absolute inset-0"
-        style={{ width: "100vw", height: "100vh", y: robotY }}
+        style={{ width: "100vw", height: "100svh", y: robotY }}
       >
         <Canvas
           camera={{ position: [0, 1, 4.2] }}
+          dpr={isMobile ? [1, 1.25] : [1, 2]}
           gl={{ toneMappingExposure: 0.95 }}
         >
           <Suspense fallback={<Loader />}>
@@ -36,7 +37,7 @@ const Hero = () => {
             <pointLight position={[-3, 2, 2]} intensity={1} color="#ca2f8c" />
             <pointLight position={[2, -2, 3]} intensity={2.5} color="#33c2cc" />
             <fog attach="fog" args={["#2a0f3a", 5, 14]} />
-            <Environment resolution={128}>
+            <Environment resolution={isMobile ? 64 : 128}>
               <Lightformer form="rect" intensity={3} color="#ff8a50" position={[0, 1, -6]} scale={[14, 4, 1]} />
               <Lightformer form="rect" intensity={1} color="#ca2f8c" position={[-6, 3, 2]} rotation-y={Math.PI / 2} scale={[8, 6, 1]} />
               <Lightformer form="rect" intensity={2} color="#33c2cc" position={[5, -2, 3]} rotation-y={-Math.PI / 2} scale={[8, 4, 1]} />
@@ -45,7 +46,7 @@ const Hero = () => {
             <Float speed={0.7} rotationIntensity={0.6} floatIntensity={1.2}>
               <Robot
                 scale={isMobile ? 0.5 : 0.95}
-                position={isMobile ? [0, -1.2, 0] : [1.3, -0.5, 0]}
+                position={isMobile ? [0, -1.5, 0] : [1.3, -0.5, 0]}
               />
             </Float>
             <Rig />
@@ -62,7 +63,7 @@ const Hero = () => {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 pointer-events-none opacity-[0.14] mix-blend-overlay"
+          className="absolute inset-0 hidden pointer-events-none md:block opacity-[0.14] mix-blend-overlay"
           style={{
             backgroundImage:
               "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",

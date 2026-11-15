@@ -31,7 +31,7 @@ const About = () => {
             ref={grid2Container}
             className="flex items-center justify-center w-full h-full"
           >
-            <p className="flex items-end text-5xl text-gray-500">
+            <p className="flex items-end text-3xl text-gray-500 md:text-5xl">
               BEYOND THE CODE
             </p>
             <Card
@@ -74,13 +74,13 @@ const About = () => {
         </div>
         {/* Grid 3 */}
         <div className="grid-black-color grid-3">
-          <div className="z-10 w-[50%]">
+          <div className="z-10 w-full md:w-[50%]">
             <p className="headtext">My Toolbox</p>
             <p className="subtext">
               The languages, frameworks and tools I build and ship with
             </p>
           </div>
-          <figure className="absolute left-[48%] top-[0%]">
+          <figure className="absolute left-1/2 -translate-x-1/2 top-[7rem] md:translate-x-0 md:left-[48%] md:top-[0%]">
             <TechSphere />
           </figure>
         </div>
