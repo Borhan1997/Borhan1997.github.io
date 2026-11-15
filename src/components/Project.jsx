@@ -36,7 +36,7 @@ const Project = ({
           <button
             onClick={() => isActive && setIsHidden(true)}
             disabled={!isActive}
-            className={`flex items-center gap-2 pt-5 mt-auto w-fit ${
+            className={`flex items-center gap-2 pt-5 pb-1 mt-auto min-h-11 w-fit ${
               isActive
                 ? "cursor-pointer hover-animation"
                 : "cursor-not-allowed"

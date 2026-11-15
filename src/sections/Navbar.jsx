@@ -63,7 +63,7 @@ const Navbar = () => {
           className="block overflow-hidden text-center sm:hidden"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
-          style={{ maxHeight: "100vh" }}
+          style={{ maxHeight: "100svh" }}
           transition={{ duration: 1 }}
         >
           <nav className="pb-5">

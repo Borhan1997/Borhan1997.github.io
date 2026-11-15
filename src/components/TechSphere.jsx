@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 
@@ -80,9 +80,28 @@ function Sphere() {
 }
 
 export function TechSphere() {
+  const box = useRef(null);
+  const [visible, setVisible] = useState(true);
+  // Only render frames while the sphere is on screen.
+  useEffect(() => {
+    const el = box.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) =>
+      setVisible(entry.isIntersecting)
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   return (
-    <div className="size-[18rem] cursor-grab active:cursor-grabbing">
-      <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
+    <div
+      ref={box}
+      className="size-[16rem] md:size-[18rem] cursor-grab active:cursor-grabbing"
+    >
+      <Canvas
+        camera={{ position: [0, 0, 6], fov: 45 }}
+        dpr={[1, 1.5]}
+        frameloop={visible ? "always" : "never"}
+      >
         <Sphere />
         <OrbitControls
           enableZoom={false}

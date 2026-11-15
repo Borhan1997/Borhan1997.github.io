@@ -49,10 +49,11 @@ export const Timeline = ({ data }) => {
               </div>
             </div>
 
-            <div className="relative w-full pl-20 pr-4 md:pl-4">
+            <div className="relative w-full pl-12 pr-4 md:pl-4">
               <div className="block mb-4 text-2xl font-bold text-left text-neutral-300 md:hidden ">
                 <h3>{item.date}</h3>
-                <h3 className="text-lg font-semibold text-neutral-400">
+                <h3 className="text-xl text-neutral-400">{item.title}</h3>
+                <h3 className="text-lg font-semibold text-neutral-500">
                   {item.job}
                 </h3>
                 {item.location && (
