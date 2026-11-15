@@ -43,32 +43,20 @@ const Ring = ({ radius, tube = 0.03, color = COLORS.cyan, ...props }) => (
   </mesh>
 );
 
-function Hand({ pointing }) {
+// Both hands share the same three-finger design.
+function Hand() {
   return (
     <group>
       <mesh>
         <sphereGeometry args={[0.1, 20, 16]} />
         <Shell color={COLORS.joint} />
       </mesh>
-      {pointing ? (
-        <>
-          <mesh position={[0, -0.17, 0]}>
-            <capsuleGeometry args={[0.032, 0.18, 6, 10]} />
-            <Shell color={COLORS.shell} />
-          </mesh>
-          <mesh position={[0.07, -0.06, 0.04]} rotation={[0, 0, -0.6]}>
-            <capsuleGeometry args={[0.026, 0.07, 6, 10]} />
-            <Shell color={COLORS.joint} />
-          </mesh>
-        </>
-      ) : (
-        [-0.05, 0, 0.05].map((x) => (
-          <mesh key={x} position={[x, -0.15, 0]}>
-            <capsuleGeometry args={[0.026, 0.08, 6, 10]} />
-            <Shell color={COLORS.joint} />
-          </mesh>
-        ))
-      )}
+      {[-0.05, 0, 0.05].map((x) => (
+        <mesh key={x} position={[x, -0.15, 0]}>
+          <capsuleGeometry args={[0.026, 0.08, 6, 10]} />
+          <Shell color={COLORS.joint} />
+        </mesh>
+      ))}
     </group>
   );
 }
@@ -95,7 +83,7 @@ function Arm({ side, innerRef, forearmRef, pointing }) {
           <Shell />
         </mesh>
         <group position={[0, -0.4, 0]}>
-          <Hand pointing={pointing} />
+          <Hand />
         </group>
       </group>
     </group>
@@ -297,7 +285,11 @@ export function Robot(props) {
       }}
       onClick={(e) => {
         e.stopPropagation();
-        spin.current.target += Math.PI * 2;
+        // Push the clicked half away: left half spins one way, right half the other.
+        const center = root.current.getWorldPosition(new Vector3()).project(e.camera);
+        const hit = e.point.clone().project(e.camera);
+        const dir = hit.x < center.x ? -1 : 1;
+        spin.current.target += dir * Math.PI * 2;
       }}
     >
       {/* Body */}
