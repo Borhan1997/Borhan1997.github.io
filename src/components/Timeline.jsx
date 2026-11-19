@@ -2,7 +2,7 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-export const Timeline = ({ data }) => {
+export const Timeline = ({ data, title = "My Work Experience" }) => {
   const ref = useRef(null);
   const containerRef = useRef(null);
   const [height, setHeight] = useState(0);
@@ -24,7 +24,7 @@ export const Timeline = ({ data }) => {
 
   return (
     <div className="c-space section-spacing" ref={containerRef}>
-      <h2 className="text-heading">My Work Experience</h2>
+      <h2 className="text-heading">{title}</h2>
       <div ref={ref} className="relative pb-20">
         {data.map((item, index) => (
           <div
@@ -67,6 +67,18 @@ export const Timeline = ({ data }) => {
                   {content}
                 </p>
               ))}
+              {item.tags && (
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 text-sm rounded-full border border-white/10 bg-white/5 text-neutral-300"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         ))}
