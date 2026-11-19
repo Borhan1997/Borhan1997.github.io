@@ -2,6 +2,7 @@ import { useRef } from "react";
 import Card from "../components/Card";
 import { TechSphere } from "../components/TechSphere";
 import CopyEmailButton from "../components/CopyEmailButton";
+import { languages } from "../constants";
 
 const About = () => {
   const grid2Container = useRef();
@@ -24,6 +25,48 @@ const About = () => {
             </p>
           </div>
           <div className="absolute inset-x-0 pointer-evets-none -bottom-4 h-1/2 sm:h-1/3 bg-gradient-to-t from-indigo" />
+        </div>
+        {/* Grid 3 */}
+        <div className="grid-black-color grid-3">
+          <div className="z-10 w-full md:w-[50%]">
+            <p className="headtext">My Toolbox</p>
+            <p className="subtext">
+              The languages, frameworks and tools I build and ship with
+            </p>
+          </div>
+          <figure className="absolute left-1/2 -translate-x-1/2 top-[7rem] md:translate-x-0 md:left-[48%] md:top-[0%]">
+            <TechSphere />
+          </figure>
+        </div>
+        {/* Grid 5 (Languages) */}
+        <div className="grid-black-color grid-5">
+          <p className="headtext">Languages</p>
+          <ul className="flex flex-col gap-3 mt-5">
+            {languages.map((lang) => (
+              <li key={lang.name} className="flex items-center justify-between">
+                <span className="text-neutral-200">
+                  {lang.name}
+                  <span className="ml-2 text-sm text-neutral-500">
+                    {lang.level}
+                  </span>
+                </span>
+                <span
+                  className="flex gap-1.5"
+                  role="img"
+                  aria-label={`${lang.level} (${lang.dots} of 5)`}
+                >
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <span
+                      key={i}
+                      className={`size-2.5 rounded-full ${
+                        i < lang.dots ? "bg-lavender" : "bg-white/10"
+                      }`}
+                    />
+                  ))}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
         {/* Grid 2 */}
         <div className="grid-default-color grid-2">
@@ -71,18 +114,6 @@ const About = () => {
               containerRef={grid2Container}
             />
           </div>
-        </div>
-        {/* Grid 3 */}
-        <div className="grid-black-color grid-3">
-          <div className="z-10 w-full md:w-[50%]">
-            <p className="headtext">My Toolbox</p>
-            <p className="subtext">
-              The languages, frameworks and tools I build and ship with
-            </p>
-          </div>
-          <figure className="absolute left-1/2 -translate-x-1/2 top-[7rem] md:translate-x-0 md:left-[48%] md:top-[0%]">
-            <TechSphere />
-          </figure>
         </div>
         {/* Grid 4 */}
         <div className="grid-special-color grid-4">

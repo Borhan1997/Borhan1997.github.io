@@ -250,11 +250,6 @@ export const mySocials = [
     href: "https://www.linkedin.com/in/borhan-hleiss-b2b048b2/",
     icon: "/assets/socials/linkedIn.svg",
   },
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/borhan_hleiss/reels/",
-    icon: "/assets/socials/instagram.svg",
-  },
 ];
 
 export const experiences = [
@@ -344,4 +339,49 @@ export const reviews = [
     body: "So glad I found this. It has changed the game for me.",
     img: "https://robohash.org/eve",
   },
+];
+
+export const education = [
+  {
+    title: "BEng, Mechanical Engineering",
+    job: "Beirut Arab University, Faculty of Engineering",
+    location: "Beirut, Lebanon",
+    date: "Jun 2019",
+    contents: [
+      "A broad mechanical engineering degree with a strong control and instrumentation focus. It gave me the foundation in dynamic systems, sensing and mechatronics that later led me into robotics.",
+    ],
+    tags: [
+      "Dynamic Systems Control",
+      "Instrumentation & Measurements",
+      "Mechatronics",
+      "Thermodynamics",
+      "Fluid Mechanics",
+    ],
+  },
+  {
+    title: "MSc, Mobile, Autonomous and Robotic Systems",
+    job: "Grenoble INP, ENSE3",
+    location: "Grenoble, France",
+    date: "Sep 2022",
+    contents: [
+      "A master's programme on how autonomous systems sense, plan and act, covering AI and machine learning, embedded systems, optimal and predictive control, perception and navigation, with hands-on work in Python, Matlab and ROS.",
+      "Thesis: designing and implementing a control and command system for a Magnus Effect Kite, completed as an internship at Wind Fisher SAS (Feb – Aug 2022).",
+    ],
+    tags: [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Embedded Systems",
+      "Optimal & Predictive Control",
+      "Perception & Motion Tracking",
+      "Navigation & Path Planning",
+      "ROS",
+    ],
+  },
+];
+
+export const languages = [
+  { name: "Arabic", level: "Native", dots: 5 },
+  { name: "English", level: "Fluent", dots: 4 },
+  { name: "French", level: "Fluent", dots: 4 },
+  { name: "German", level: "Intermediate", dots: 3 },
 ];
