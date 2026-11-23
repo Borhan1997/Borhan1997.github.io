@@ -3,6 +3,77 @@ export const myProjects = [
     id: 1,
     // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
     status: "active",
+    title: "AI Teammates for everyday Tasks",
+    description:
+      "An open-source alternative to Grok Bot: AI teammates that each have a job, a memory and a cloud computer of their own, working alongside you in chat.",
+    subDescription: [
+      "Built a Next.js 16 and React 19 app where each teammate gets a name, a job and persistent instructions, with Clerk for authentication and Neon Postgres with Drizzle ORM for storage.",
+      "Gave every bot its own persistent Daytona sandbox with a shell, filesystem and graphical desktop, and let it drive them with computer-use tools, streaming a live desktop view into the chat over noVNC.",
+      "Moved chat to a durable Trigger.dev agent running Claude through the Anthropic API, so long desktop tasks survive refreshes, redeploys and closed tabs.",
+      "Added group chats where a bot hands a request to the teammate whose job it is, plus a shared memory file for each bot so notes saved in one chat carry into every other.",
+      "Deployed the app on Railway.",
+    ],
+    href: "https://crewmate-production-b05dd579.up.railway.app/",
+    sourceCode: "https://github.com/Borhan1997/Crewmate",
+    logo: "/assets/logos/crewmate_logo.svg",
+    image: "/assets/projects/ai-teammate.jpg",
+    tags: [
+      {
+        id: 1,
+        name: "Next.js",
+        path: "/assets/logos/nextjs.svg",
+      },
+      {
+        id: 2,
+        name: "React",
+        path: "/assets/logos/react.svg",
+      },
+      {
+        id: 1,
+        name: "TypeScript",
+        path: "/assets/logos/typescript.svg",
+      },
+      {
+        id: 1,
+        name: "Tailwind CSS",
+        path: "/assets/logos/tailwindcss.svg",
+      },
+      {
+        id: 5,
+        name: "Clerk",
+        path: "/assets/logos/clerk.svg",
+      },
+      {
+        id: 6,
+        name: "Anthropic",
+        path: "/assets/logos/anthropic.svg",
+      },
+      {
+        id: 7,
+        name: "Trigger.dev",
+        path: "/assets/logos/triggerdotdev.svg",
+      },
+      {
+        id: 8,
+        name: "Daytona",
+        path: "/assets/logos/daytona.svg",
+      },
+      {
+        id: 9,
+        name: "Neon",
+        path: "/assets/logos/neon.svg",
+      },
+      {
+        id: 10,
+        name: "Railway",
+        path: "/assets/logos/railway.svg",
+      },
+    ],
+  },
+  {
+    id: 2,
+    // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
+    status: "active",
     title: "MLOps for a CV Model",
     description:
       "Automates the full lifecycle of a defect-detection model for industrial castings, from versioned data to a monitored, containerized API.",
@@ -65,7 +136,7 @@ export const myProjects = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
     status: "active",
     title: "Audio Classification CNN",
@@ -110,7 +181,7 @@ export const myProjects = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
     status: "wip",
     title: "Multimodal Emotion Recognition",
@@ -126,25 +197,6 @@ export const myProjects = [
     sourceCode: "",
     logo: "",
     image: "/assets/projects/emotion-recognition.jpg",
-    tags: [],
-  },
-  {
-    id: 4,
-    // "active" | "wip" (work in progress, not clickable) | "disabled" (not clickable)
-    status: "disabled",
-    title: "AI Teammate for everyday Tasks",
-    description:
-      "Automates the full lifecycle of a defect-detection model for industrial castings, from versioned data to a monitored, containerized API.",
-    subDescription: [
-      "Built a reproducible ResNet18 training pipeline in PyTorch, with every run tracked in MLflow and datasets versioned with DVC on a DagsHub remote.",
-      "Implemented an automated evaluation gate that blocks any model whose defect recall drops below a set floor or regresses against the stored baseline.",
-      "Designed a CI/CD workflow with GitHub Actions that pulls data, trains, evaluates and gates each change, then publishes a Docker image to GHCR.",
-      "Added a FastAPI inference service with prediction logging, plus Prometheus and Grafana dashboards for drift monitoring.",
-    ],
-    href: "",
-    sourceCode: "",
-    logo: "",
-    image: "/assets/projects/ai-teammate.jpg",
     tags: [],
   },
   {
